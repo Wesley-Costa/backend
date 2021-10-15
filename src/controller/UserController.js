@@ -4,13 +4,18 @@ const connection = require('../database/connection')
 module.exports = {
     async create(req, res){
         const id = crypto.randomBytes(4).toString('hex')
-        const {email, nome, sobrenome, telefone} = req.body
+        const {email, senha, nome, sobrenome, telefone,  funcao, dataCadastro, imagem, status} = req.body
         await connection('users').insert({
             id,
-            email,
-            nome,
-            sobrenome,
-            telefone
+            email, 
+            senha, 
+            nome, 
+            sobrenome, 
+            telefone,  
+            funcao, 
+            dataCadastro, 
+            imagem, 
+            status
         });
         res.json({id});
     },
@@ -30,15 +35,20 @@ module.exports = {
 
     async update(req, res){
         const {id} = req.params;
-        const {email, nome, sobrenome, telefone} = req.body
+        const {email, senha, nome, sobrenome, telefone,  funcao, dataCadastro, imagem, status} = req.body
         await connection('users')
             .where('id',id)
             .update({
                 id,
-                email,
-                nome,
-                sobrenome,
-                telefone
+                email, 
+                senha, 
+                nome, 
+                sobrenome, 
+                telefone,  
+                funcao, 
+                dataCadastro, 
+                imagem, 
+                status
         });
         return res.status(204).send();
     },
